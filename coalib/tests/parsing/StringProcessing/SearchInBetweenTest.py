@@ -7,6 +7,9 @@ from coalib.tests.parsing.StringProcessing.StringProcessingTestBase import (
     StringProcessingTestBase)
 
 
+# TODO Refactor all self.bs / bs to "\\", it annoys.
+# TODO Use raw strings where appropriate (so: only when \ is inside the string,
+#      not at end) applies to all StringProcessingTests.
 class SearchInBetweenTest(StringProcessingTestBase):
     bs = StringProcessingTestBase.bs
 
