@@ -1,4 +1,5 @@
 from coalib.misc.Decorators import generate_eq, generate_repr
+from coalib.parsing.StringProcessing import Match
 
 
 @generate_repr("begin", "inside", "end")
@@ -20,6 +21,36 @@ class InBetweenMatch:
         self._begin = begin
         self._inside = inside
         self._end = end
+
+    @classmethod
+    def from_values(cls, begin, begin_pos, inside, inside_pos, end, end_pos):
+        """
+        Instantiates a new InBetweenMatch from Match values.
+
+        This function allows to bypass the usage of Match object instantation:
+
+        ```
+        InBetweenMatch(Match("A", 0), Match("B", 1), Match("B", 2))
+        ```
+
+        can be simplified to:
+
+        ```
+        InBetweenMatch.from_values("A", 0, "B", 1, "C", 2)
+        ```
+
+        :param begin:      The matched string from start pattern.
+        :param begin_pos:  The position of the matched begin string.
+        :param inside:     The matched string from inside/in-between pattern.
+        :param inside_pos: The position of the matched inside/in-between
+                           string.
+        :param end:        The matched string from end pattern.
+        :param end_pos:    The position of the matched end string.
+        :returns:          An InBetweenMatch from the given values.
+        """
+        return cls(Match(begin, begin_pos),
+                   Match(inside, inside_pos),
+                   Match(end, end_pos))
 
     @property
     def begin(self):
