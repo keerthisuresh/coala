@@ -2,12 +2,13 @@ import sys
 import unittest
 
 sys.path.insert(0, ".")
-from coalib.tests.parsing.StringProcessingTest import StringProcessingTest
 from coalib.parsing.StringProcessing import nested_search_in_between
+from coalib.tests.parsing.StringProcessing.StringProcessingTestBase import (
+    StringProcessingTestBase)
 
 
-class NestedSearchInBetweenTest(StringProcessingTest):
-    bs = StringProcessingTest.bs
+class NestedSearchInBetweenTest(StringProcessingTestBase):
+    bs = StringProcessingTestBase.bs
 
     test_basic_expected_results = [
         [r"", r"This is a word", r"(in a word) another "],
