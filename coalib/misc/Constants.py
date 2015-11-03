@@ -74,4 +74,7 @@ class Constants:
 
     TAGS_DIR = os.path.join(USER_DIR, "tags")
     if not os.path.exists(TAGS_DIR):  # pragma: no cover
-        os.makedirs(TAGS_DIR)
+        try:
+            os.makedirs(TAGS_DIR)
+        except:
+            pass
