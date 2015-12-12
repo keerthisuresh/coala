@@ -100,22 +100,16 @@ class DocstyleDefinition:
     @classmethod
     def load(cls, language, docstyle):
         """
-        Returns a `DocstyleDefinition` defined for the given language and
-        docstyle from the coala docstyle definition files.
+        Loads a `DocstyleDefinition` from the coala docstyle definition files.
 
-        The marker settings are loaded from the according coalang-files. Each
-        setting inside them are considered a marker setting.
+        This function considers all settings inside the according coalang-files
+        as markers.
 
-        :param language:           The programming language. For example
-                                   `"CPP"` for C++ or `"PYTHON3"` for Python 3.
-                                   The given string is automatically lowered,
-                                   so passing i.e. "CPP" or "cpp" makes no
-                                   difference.
-        :param docstyle:           The documentation style/tool used. For
-                                   example `"default"` or `"doxygen"`.
-                                   The given string is automatically lowered,
-                                   so passing i.e. "default" or "DEFAULT" makes
-                                   no difference.
+        :param language:           The case insensitive programming language of
+                                   the documentation comment as a string.
+        :param docstyle:           The case insensitive documentation
+                                   style/tool used to document code, e.g.
+                                   `"default"` or `"doxygen"`.
         :raises FileNotFoundError: Raised when the given docstyle was not
                                    found. This is a compatability exception
                                    from `coalib.misc.Compatability` module.
