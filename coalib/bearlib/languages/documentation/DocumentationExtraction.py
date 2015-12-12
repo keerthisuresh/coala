@@ -7,6 +7,11 @@ from coalib.bearlib.languages.documentation.DocumentationComment import (
 from coalib.results.TextRange import TextRange
 
 
+# Used to break out of outer loops via exception raise.
+class _BreakOut(Exception):
+    pass
+
+
 def extract_documentation_with_docstyle(content, docstyle_definition):
     """
     Extracts all documentation texts inside the given source-code-string.
@@ -24,10 +29,6 @@ def extract_documentation_with_docstyle(content, docstyle_definition):
         content = content.splitlines(keepends=True)
     else:
         content = list(content)
-
-    # Used to break out of outer loops via exception raise.
-    class BreakOut(Exception):
-        pass
 
     # Prepare marker-tuple dict that maps a begin pattern to the corresponding
     # marker_set(s). This makes it faster to retrieve a marker-set from a
@@ -118,7 +119,7 @@ def extract_documentation_with_docstyle(content, docstyle_definition):
                                             marker_set[1]):
                                         # Effectively a 'continue' for the
                                         # outer for-loop.
-                                        raise BreakOut
+                                        raise _BreakOut
 
                                     stripped_content = (
                                         content[line2][begin_match.start()
@@ -130,7 +131,7 @@ def extract_documentation_with_docstyle(content, docstyle_definition):
                                 if line2 >= len(content):
                                     # End of content reached, so there's no
                                     # closing marker and that's a mismatch.
-                                    raise BreakOut
+                                    raise _BreakOut
 
                                 end_marker_pos = content[line2].find(
                                     marker_set[2])
@@ -156,7 +157,7 @@ def extract_documentation_with_docstyle(content, docstyle_definition):
 
                     break
 
-                except BreakOut:
+                except _BreakOut:
                     # Continues the marker_set loop.
                     pass
 
