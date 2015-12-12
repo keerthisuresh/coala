@@ -12,6 +12,16 @@ class _BreakOut(Exception):
     pass
 
 
+def _compile_multi_match_regex(strings):
+    """
+    Compiles a regex object that matches each of the given strings.
+
+    :param strings: The strings to match.
+    :return:        A regex object.
+    """
+    return re.compile("|".join(re.escape(strings)))
+
+
 def extract_documentation_with_docstyle(content, docstyle_definition):
     """
     Extracts all documentation texts inside the given source-code-string.
@@ -44,9 +54,8 @@ def extract_documentation_with_docstyle(content, docstyle_definition):
 
     # Using regexes to perform a variable match is faster than finding each
     # substring with `str.find()` choosing the lowest match.
-    begin_regex = re.compile("|".join(
-        re.escape(marker_set[0])
-        for marker_set in docstyle_definition.markers))
+    begin_regex = _compile_multi_match_regex(
+        marker_set[0] for marker_set in docstyle_definition.markers)
 
     line = 0
     line_pos = 0
