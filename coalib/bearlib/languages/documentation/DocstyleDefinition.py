@@ -19,10 +19,10 @@ class DocstyleDefinition:
         Instantiates a new DocstyleDefinition.
 
         :param language: The case insensitive programming language of the
-                         documentation comment, i.e. For example `"CPP"` for
-                         C++ or `"PYTHON3"`.
+                         documentation comment, e.g. `"CPP"` for C++ or
+                         `"PYTHON3"`.
         :param docstyle: The case insensitive documentation style/tool used
-                         to document code, i.e. `"default"` or `"doxygen"`.
+                         to document code, e.g. `"default"` or `"doxygen"`.
         :param markers:  An iterable of marker/delimiter string iterables that
                          identify a documentation comment. See `markers`
                          property for more details on markers.
